@@ -1,0 +1,10 @@
+.camSvg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+svg {
+  width: 36px;
+  height: 30px;
+}

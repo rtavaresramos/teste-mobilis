@@ -1,0 +1,82 @@
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px -5px #778dad;
+}
+
+.all-data {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.input-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #778dad;
+  margin: 8px;
+}
+.input-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 6px;
+  background: var(--background);
+  height: 46px;
+  border-radius: 10px;
+}
+.input-info input {
+  appearance: none;
+  border: 0;
+  outline: none;
+  width: 100%;
+  padding-left: 8px;
+  background: var(--background);
+}
+.input-date {
+  display: flex;
+  margin: 6px;
+  background: var(--background);
+  height: 46px;
+  border-radius: 10px;
+}
+.input-date input {
+  appearance: none;
+  border: 0;
+  outline: none;
+  margin: 0 20px;
+  padding-left: 8px;
+  background: var(--background);
+}
+
+.button-place {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}

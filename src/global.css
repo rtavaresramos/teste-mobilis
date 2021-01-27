@@ -1,0 +1,327 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+:root {
+  --primary: #3350b8;
+  --primary-dark: #2a4196;
+  --dark-blue: #011f3b;
+  --background: #f5f5fb;
+  --text-color: #778dad;
+  --icon-color: #c7cadd;
+  --white: #fff;
+  --danger: #e24444;
+  --light-success: #deffe5;
+  --light-warning: #fff6de;
+  --light-danger: #ffcece;
+}
+* {
+  font-family: "Inter", sans-serif;
+}
+
+html {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+@keyframes fadeRight {
+  from {
+    transform: translate(400px, 0);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.d-none {
+  display: none;
+}
+.fade-in {
+  animation: fadeIn 0.5s linear;
+}
+.fade-out {
+  animation: fadeOut 0.5s linear;
+}
+
+.input-info {
+  transition: all 0.3s ease;
+}
+
+.input-info:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.text-color {
+  color: var(--text-color);
+}
+
+.link-details:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.d-flex {
+  display: flex;
+}
+.text-center {
+  text-align: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.view-container {
+  height: 90vh;
+  overflow-y: hidden;
+  padding: 30px;
+}
+
+.success {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  min-height: 50px;
+  margin: 0 auto 20px;
+  color: white;
+  background: rgba(50, 224, 143, 1);
+  border-radius: 5px;
+  padding: 4px;
+  transform: translate(400px, 0);
+  animation: fadeRight 0.6s ease, fadeOut 1s ease 1s;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  min-height: 50px;
+  margin: 0 auto 20px;
+  color: red;
+  background: rgba(255, 0, 0, 0.075);
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.list-action-icon {
+  cursor: pointer;
+  margin: 20px 10px 10px;
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.main {
+  background: white;
+}
+
+.view-list {
+  width: 100%;
+  margin: 20px;
+  margin-bottom: 100px;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 0 10px -5px #778dad;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 8px;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  color: #363839;
+  border: 1px solid #bdc1c6;
+  border-radius: 4px;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+  transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+}
+input[type="checkbox"]::before {
+  position: absolute;
+  content: "";
+  display: block;
+  /* top: 2px; */
+  left: 5px;
+  width: 8px;
+  height: 14px;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+input[type="checkbox"]:checked {
+  color: #000;
+  border-color: var(--primary);
+  background: var(--primary);
+}
+input[type="checkbox"]:checked::before {
+  opacity: 1;
+}
+input[type="checkbox"]:checked ~ label::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  /* max-width: 800px; */
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+table * {
+  position: relative;
+}
+/* table td {
+	 min-width: 50px;
+} */
+table td,
+table th {
+  padding: 0 18px;
+  font-size: 0.9rem;
+}
+table thead tr {
+  height: 60px;
+  background: var(--primary);
+}
+table tbody tr {
+  height: 54px;
+  border-bottom: 1px solid #e3f1d5;
+}
+table tbody tr:last-child {
+  border: 0;
+  margin-bottom: 6px;
+}
+table td,
+table th {
+  text-align: left;
+}
+table th {
+  color: #fff;
+}
+table td.l,
+table th.l {
+  text-align: right;
+}
+table td.c,
+table th.c {
+  text-align: center;
+}
+table td.r,
+table th.r {
+  text-align: center;
+}
+@media screen and (max-width: 35.5em) {
+  table {
+    display: block;
+  }
+  table > *,
+  table tr,
+  table td,
+  table th {
+    display: block;
+  }
+  table thead {
+    display: none;
+  }
+  table tbody tr {
+    height: auto;
+    padding: 8px 0;
+  }
+  table tbody tr td {
+    padding-left: 45%;
+    margin-bottom: 12px;
+  }
+  table tbody tr td:last-child {
+    margin-bottom: 0;
+  }
+  table tbody tr td:before {
+    position: absolute;
+    font-weight: 700;
+    width: 40%;
+    left: 10px;
+    top: 0;
+  }
+  table tbody tr td:nth-child(1):before {
+    content: "Code";
+  }
+  table tbody tr td:nth-child(2):before {
+    content: "Stock";
+  }
+  table tbody tr td:nth-child(3):before {
+    content: "Cap";
+  }
+  table tbody tr td:nth-child(4):before {
+    content: "Inch";
+  }
+  table tbody tr td:nth-child(5):before {
+    content: "Box Type";
+  }
+}

@@ -1,0 +1,33 @@
+::-webkit-input-placeholder {
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+a {
+  text-decoration: none;
+  color: unset;
+}
+.container {
+  display: flex;
+  /* background: var(--background); */
+  width: 100vw;
+  height: 100vh;
+}
+.left-aside {
+  background: white !important;
+  padding: 20px;
+  max-width: 270px;
+  min-width: 270px;
+}
+.right-aside {
+  background: white !important;
+  padding: 20px;
+  max-width: 320px;
+}
+.main {
+  background: #f5f5fb !important;
+  flex: 1;
+  padding: 20px;
+  overflow: hidden;
+}
