@@ -8,6 +8,7 @@ export default function VerticalMore() {
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="icon"
     >
       <path
         fill-rule="evenodd"

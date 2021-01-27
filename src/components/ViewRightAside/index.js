@@ -1,42 +1,106 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import firebase from "../../firebase";
 
-export default function ViewRightAside() {
-  const { currentUser } = useAuth();
+
+import Camera from "../icons/Camera";
+import VerticalMore from "../icons/VerticalMore";
+import Check from "../icons/Check";
+import ProfileImage from "../ProfileImage";
+import PopUp from "../PopUp";
+
+import "./styles.css";
+
+export default function ViewRightAside(props) {
+  const uploadImageRef = useRef();
+  const [active, setActive] = useState(false);
+  const [profile, setProfile] = useState({});
+  const [profileImage, setProfileImage] = useState();
+
+
+  useEffect(()=> {
+    const ref = firebase.database().ref(`users`);
+
+    ref.on("value", (data) => {
+      const values = data.val();
+
+      const user = Object.keys(values).map((i) => values[i]);
+
+      user.map((data) => {
+        if(data.id === props.userInfo.uid) { setProfile(data) }
+      })
+    })
+  },[props.userInfo])
+
+  function handlePhoto() {
+    uploadImageRef.current.value = null;
+    uploadImageRef.current.click();
+  }
+
+ async function handleFile({target}){
+
+  let image = target.files[0]
+  let url =""
+
+
+    const snapshot = await firebase
+      .storage()
+      .ref(props.userInfo.uid)
+      .child('profile-image')
+      .put(image);
+
+      url = await snapshot.ref.getDownloadURL()
+      const ref = firebase.database().ref(`users`);
+      ref.child(props.userInfo.uid).update({id:props.userInfo.uid, photoUrl: url });
+
+  }
+
+
+
+  function changeActiveState() {
+    setActive(!active);
+  }
 
   return (
     <div className="view-right-aside">
       <div className="header">
-        {/* <ProfileImage :src="profile.photoUrl" /> */}
-        <div className="profile">
-          <img src={currentUser.photo} alt="profile image" />
-        </div>
-        {/* <Camera className="camera" @changePicture="changePicture" /> */}
+        <ProfileImage
+          src={profile.photoUrl ? profile.photoUrl : ""}
+        />
+        <Camera className="camera" emit={handlePhoto} onClick={handlePhoto} />
+
         <input
-          ref="uploadImage"
+          ref={uploadImageRef}
           className="d-none"
           type="file"
           accept="image/*"
+          onChange={handleFile}
         />
         <div className="info">
           <div className="title">
-            <h4>{}</h4>
+            {props.userInfo.displayName ? (
+              <h4>{props.userInfo.displayName}</h4>
+            ) : (
+              <h4>Seja Bem Vindo</h4>
+            )}
 
-            <p>{currentUser.email}</p>
+            <p>{props.userInfo.email}</p>
           </div>
           <span className="icon">
-            {/* <p className="link" @click="active = !active">
-          <VerticalMore />
-        </p> */}
+            <p className="link" onClick={changeActiveState}>
+              <VerticalMore />
+            </p>
           </span>
         </div>
       </div>
       <div className="main">
-        {/* <PopUp v-if="active" /> */}
+        {active ? <PopUp /> : <></>}
 
         <div className="time-line">
           <h3 className="notes">
-            <span>{/* <Check /> */}</span>
+            <span>
+              <Check />
+            </span>
             Lembretes
           </h3>
           <div className="input-place">

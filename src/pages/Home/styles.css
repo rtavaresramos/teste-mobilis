@@ -10,19 +10,18 @@ a {
 }
 .container {
   display: flex;
-  /* background: var(--background); */
+  background: transparent;
   width: 100vw;
   height: 100vh;
 }
 .left-aside {
   background: white !important;
-  padding: 20px;
+
   max-width: 270px;
   min-width: 270px;
 }
 .right-aside {
-  background: white !important;
-  padding: 20px;
+  background: #f5f5fb !important;
   max-width: 320px;
 }
 .main {
