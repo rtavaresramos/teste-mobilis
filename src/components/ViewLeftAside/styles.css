@@ -61,11 +61,11 @@ h4 {
   border-radius: 5px;
   font-weight: bold;
 }
-.menu ul {
+ul {
   list-style: none;
   padding: 0;
 }
-.menu ul li {
+ul li {
   min-width: 140px;
   display: flex;
   justify-content: flex-start;
@@ -74,13 +74,13 @@ h4 {
   padding-right: 10px;
   border-right: 4px solid transparent;
 }
-.menu ul li.selected {
+ul li.selected {
   border-right: 4px solid var(--primary);
 }
-.menu ul li.selected span svg {
+ul li.selected span svg {
   --icon-color: var(--primary) !important;
 }
-.menu ul li p {
+ul li p {
   color: var(--text-color);
   cursor: pointer;
 }

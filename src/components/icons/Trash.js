@@ -1,5 +1,6 @@
 import React from "react";
 
+import "./styles.css";
 export default function Trash() {
   return (
     <div style={{ cursor: "pointer" }}>
@@ -9,6 +10,7 @@ export default function Trash() {
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className="icon"
       >
         <path
           fill-rule="evenodd"

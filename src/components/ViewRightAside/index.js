@@ -1,61 +1,66 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useAuth } from "../../contexts/AuthContext";
+
 import firebase from "../../firebase";
 
-
+import Trash from "../icons/Trash";
 import Camera from "../icons/Camera";
 import VerticalMore from "../icons/VerticalMore";
 import Check from "../icons/Check";
 import ProfileImage from "../ProfileImage";
 import PopUp from "../PopUp";
+import Loading from "../Loading";
 
 import "./styles.css";
 
 export default function ViewRightAside(props) {
   const uploadImageRef = useRef();
   const [active, setActive] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState({});
-  const [profileImage, setProfileImage] = useState();
 
-
-  useEffect(()=> {
+  useEffect(() => {
     const ref = firebase.database().ref(`users`);
-
+    let user = {};
+    let profileData = {};
     ref.on("value", (data) => {
       const values = data.val();
 
-      const user = Object.keys(values).map((i) => values[i]);
+      if (values !== undefined && values !== null) {
+        user = Object.keys(values).map((i) => values[i]);
+        user.map((data) => {
+          if (data.id === props.userInfo.uid) {
+            profileData = data;
+          }
 
-      user.map((data) => {
-        if(data.id === props.userInfo.uid) { setProfile(data) }
-      })
-    })
-  },[props.userInfo])
+          return setProfile(profileData);
+        });
+      }
+    });
+  }, [props.userInfo]);
 
   function handlePhoto() {
     uploadImageRef.current.value = null;
     uploadImageRef.current.click();
   }
 
- async function handleFile({target}){
-
-  let image = target.files[0]
-  let url =""
-
+  async function handleFile({ target }) {
+    let image = target.files[0];
+    let url = "";
+    props.loading(true);
 
     const snapshot = await firebase
       .storage()
       .ref(props.userInfo.uid)
-      .child('profile-image')
+      .child("profile-image")
       .put(image);
 
-      url = await snapshot.ref.getDownloadURL()
-      const ref = firebase.database().ref(`users`);
-      ref.child(props.userInfo.uid).update({id:props.userInfo.uid, photoUrl: url });
-
+    url = await snapshot.ref.getDownloadURL();
+    const ref = firebase.database().ref(`users`);
+    ref
+      .child(props.userInfo.uid)
+      .update({ id: props.userInfo.uid, photoUrl: url });
+    props.loading(false);
   }
-
-
 
   function changeActiveState() {
     setActive(!active);
@@ -64,9 +69,7 @@ export default function ViewRightAside(props) {
   return (
     <div className="view-right-aside">
       <div className="header">
-        <ProfileImage
-          src={profile.photoUrl ? profile.photoUrl : ""}
-        />
+        <ProfileImage src={profile.photoUrl ? profile.photoUrl : ""} />
         <Camera className="camera" emit={handlePhoto} onClick={handlePhoto} />
 
         <input
@@ -110,22 +113,7 @@ export default function ViewRightAside(props) {
             <div className="notes-list">
               <input type="checkbox" id="todo" value="todo" />
               <p>Lembrete</p>
-              <a href="#" className="trash">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M9 1H15C16.1046 1 17 1.89543 17 3V4H20C21.1046 4 22 4.89543 22 6V8C22 9.10457 21.1046 10 20 10H19.9199L19 21C19 22.1046 18.1046 23 17 23H7C5.89543 23 5 22.1046 5.00345 21.083L4.07987 10H4C2.89543 10 2 9.10457 2 8V6C2 4.89543 2.89543 4 4 4H7V3C7 1.89543 7.89543 1 9 1ZM4 6H7H17H20V8H4V6ZM6.08649 10H17.9132L17.0035 20.917L17 21H7L6.08649 10ZM15 3V4H9V3H15Z"
-                    fill="var(--text-color)"
-                  />
-                </svg>
-              </a>
+              <Trash />
             </div>
           </div>
         </div>
