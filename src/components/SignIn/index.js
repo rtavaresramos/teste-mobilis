@@ -50,6 +50,9 @@ export default function SignIn() {
         <button type="submit" className="fadeIn">
           Entrar
         </button>
+        {error ?  <div class="error" >
+          {error}
+        </div> : ''}
       </form>
     </>
   );

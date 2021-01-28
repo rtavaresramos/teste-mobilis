@@ -2,21 +2,22 @@ import React, { useRef, useState, useEffect } from "react";
 
 import firebase from "../../firebase";
 
-import Trash from "../icons/Trash";
 import Camera from "../icons/Camera";
 import VerticalMore from "../icons/VerticalMore";
 import Check from "../icons/Check";
 import ProfileImage from "../ProfileImage";
 import PopUp from "../PopUp";
-import Loading from "../Loading";
+import AllNotes from "../AllNotes";
+
 
 import "./styles.css";
 
 export default function ViewRightAside(props) {
   const uploadImageRef = useRef();
+  const noteInputRef = useRef();
   const [active, setActive] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState({});
+
 
   useEffect(() => {
     const ref = firebase.database().ref(`users`);
@@ -37,6 +38,7 @@ export default function ViewRightAside(props) {
       }
     });
   }, [props.userInfo]);
+
 
   function handlePhoto() {
     uploadImageRef.current.value = null;
@@ -65,6 +67,34 @@ export default function ViewRightAside(props) {
   function changeActiveState() {
     setActive(!active);
   }
+
+  function checkValue(evt){
+    if(evt.keyCode === 13){
+      const ref = firebase.database().ref(`users/${props.userInfo.uid}/notes`);
+      const noteId = ref.push().key;
+
+      if(noteInputRef.current.value !== ""){
+        ref.child(noteId).set(
+          {
+            id: noteId,
+            name: noteInputRef.current.value,
+            isCompleted: false,
+            assigneeId: props.userInfo.uid,
+          },
+          (err) => {
+            if (err) {
+              console.error(err);
+            }
+  
+            noteInputRef.current.value = "";
+          }
+          );
+      }
+    }
+  }
+
+
+
 
   return (
     <div className="view-right-aside">
@@ -107,15 +137,11 @@ export default function ViewRightAside(props) {
             Lembretes
           </h3>
           <div className="input-place">
-            <input id="notes" type="text" placeholder="Adicionar lembrete" />
+            <input id="notes" ref={noteInputRef} type="text" placeholder="Adicionar lembrete" onKeyUp={checkValue} />
           </div>
-          <div className="links-item">
-            <div className="notes-list">
-              <input type="checkbox" id="todo" value="todo" />
-              <p>Lembrete</p>
-              <Trash />
-            </div>
-          </div>
+          
+            <AllNotes userInfo={props.userInfo} />
+
         </div>
       </div>
     </div>

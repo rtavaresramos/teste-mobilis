@@ -60,6 +60,10 @@ export default function SignUp() {
         <button type="submit" class="fadeIn">
           Cadastrar
         </button>
+       {error ?  <div class="error" >
+          {error}
+        </div> : ''}
+
       </form>
     </>
   );

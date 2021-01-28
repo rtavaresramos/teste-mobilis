@@ -12,6 +12,7 @@ import "./styles.css";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [view, setView] = useState("dashboard");
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const { currentUser } = useAuth();
   const history = useHistory();
@@ -20,7 +21,6 @@ export default function Home() {
     if (!currentUser) {
       history.push("/login");
     } else {
-      console.log(currentUser);
       setTimeout(() => {
         setLoading(false);
       }, 1000);
@@ -35,17 +35,24 @@ export default function Home() {
     setShowRegisterModal(true);
   }
 
+  function closeRegisterModal() {
+    setShowRegisterModal(false);
+  }
+
+  function changeMainView(viewFromAside){
+    setView(viewFromAside)
+  }
   return (
     <div>
       {loading ? <Loading /> : <></>}
       <div>
-        {showRegisterModal ? <AddNewRegister /> : <></>}
+        {showRegisterModal ? <AddNewRegister close={closeRegisterModal} /> : <></>}
         <div className="container">
           <aside className="left-aside">
-            <ViewLeftAside openModal={openNewRegisterModal} />
+            <ViewLeftAside openModal={openNewRegisterModal} changeView={changeMainView} />
           </aside>
           <main className="main">
-            <ViewMain />
+            <ViewMain view={view} />
           </main>
           <aside className="right-aside">
             <ViewRightAside

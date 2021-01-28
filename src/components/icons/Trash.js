@@ -1,9 +1,13 @@
 import React from "react";
 
 import "./styles.css";
-export default function Trash() {
+export default function Trash(props) {
+
+  function click(){
+    props.trashClicked()
+  }
   return (
-    <div style={{ cursor: "pointer" }}>
+    <div style={{ cursor: "pointer" }} onClick={click}>
       <svg
         width="16"
         height="16"

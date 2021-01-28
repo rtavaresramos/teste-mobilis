@@ -1,0 +1,21 @@
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  h1 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #778dad;
+    margin: 8px;
+    text-align: center;
+  }
+  
+  .button-place {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }

@@ -180,6 +180,10 @@ body {
   box-shadow: 0 0 10px -5px #778dad;
 }
 
+.btn {
+  margin: 4px 8px;
+}
+
 label {
   font-size: 14px;
   font-weight: 600;
