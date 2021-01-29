@@ -13,7 +13,7 @@ export default function ViewMain(props) {
   }
 
   return (
-    <div className="view-main-container">
+    <div className="view-main-container" style={{width: '100%'}}>
       <SearchBar emitText={getTextFromSearch} />
 
       {props.view === "dashboard" && <Dashboard userId={props.userInfo.uid} />}

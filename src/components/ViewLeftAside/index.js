@@ -1,30 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../assets/img/mobilis-logo.png";
-import Plus from "../icons/Plus"
+import Plus from "../icons/Plus";
 
 import "./styles.css";
-
 
 export default function ViewLeftAside(props) {
   const [view, setView] = useState("dashboard");
 
+  useEffect(() => {
+    if (localStorage.getItem("viewFromStorage") !== undefined) {
+      const view = localStorage.getItem("viewFromStorage");
+
+      switch (view) {
+        case "dashboard":
+          setView("dashboard");
+          props.changeView("dashboard");
+          break;
+
+        case "cashIn":
+          setView("cashIn");
+          props.changeView("cashIn");
+          break;
+
+        case "cashOut":
+          setView("cashOut");
+          props.changeView("cashOut");
+          break;
+
+        default:
+          break;
+      }
+    }
+  }, []);
+
   function changeViewToDashboard() {
     setView("dashboard");
     props.changeView("dashboard");
+    localStorage.setItem("viewFromStorage", "dashboard");
+
   }
 
   function changeViewToCashIn() {
     setView("cashIn");
     props.changeView("cashIn");
+    localStorage.setItem("viewFromStorage", "cashIn");
   }
 
   function changeViewToCashOut() {
     setView("cashOut");
     props.changeView("cashOut");
+    localStorage.setItem("viewFromStorage", "cashOut");
   }
 
-  function addNewRegister(){
-    props.openModal()
+  function addNewRegister() {
+    props.openModal();
   }
 
   return (
@@ -32,17 +61,14 @@ export default function ViewLeftAside(props) {
       <div className="logo-container">
         <img src={Logo} alt="logo" />
       </div>
-      <div
-      className="call-to-action"
-      onClick={addNewRegister}
-    >
-      <p className="button">
-        Novo Registro
-        <span className="icon">
-          <Plus />
-        </span>
-      </p>
-    </div>
+      <div className="call-to-action" onClick={addNewRegister}>
+        <p className="button">
+          Novo Registro
+          <span className="icon">
+            <Plus />
+          </span>
+        </p>
+      </div>
       <div className="call-to-action">
         <ul>
           <li className={view === "dashboard" ? "selected" : ""}>
