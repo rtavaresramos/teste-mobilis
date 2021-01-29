@@ -37,18 +37,18 @@ export default function ViewRightAside(props) {
       }
     });
 
-  document.addEventListener("mousedown", handleClick);
+  // document.addEventListener("mousedown", handleClick);
 
 // eslint-disable-next-line
   }, [props.userInfo]);
 
-  const handleClick = e => {
-    if (active && popUp.current.contains(e.target)) {
-      return;
-    }
-    // outside click 
-    setActive(false)
-  };
+  // const handleClick = e => {
+  //   if (active && popUp.current.contains(e.target)) {
+  //     return;
+  //   }
+  //   // outside click 
+  //   setActive(false)
+  // };
 
   function handlePhoto() {
     uploadImageRef.current.value = null;

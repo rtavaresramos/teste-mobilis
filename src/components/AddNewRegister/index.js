@@ -26,8 +26,8 @@ export default function AddNewRegister(props) {
       inputData.current.value = props.edit.date;
       setValue(props.edit.value);
     } 
-    setActive(true)
-    document.addEventListener("mousedown", handleClick);
+    // setActive(true)
+    // document.addEventListener("mousedown", handleClick);
     
     // eslint-disable-next-line
   }, []);
@@ -37,13 +37,13 @@ export default function AddNewRegister(props) {
     props.close();
   }
 
-  const handleClick = e => {
-    if (active && form.current.contains(e.target)) {
-      return;
-    }
-    // outside click 
-    closeModal()
-  };
+  // const handleClick = e => {
+  //   if (active && form.current.contains(e.target)) {
+  //     return;
+  //   }
+  //   // outside click 
+  //   closeModal()
+  // };
 
   function addData() {
     const ref = firebase
