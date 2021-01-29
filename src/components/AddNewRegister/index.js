@@ -16,7 +16,7 @@ export default function AddNewRegister(props) {
   const [selectedOption, setSelectedOption] = useState(1);
   const [value, setValue] = useState("R$0,00");
   const [triedToRegister, setTriedToRegister] = useState(false);
-  const[active, setActive] = useState(false)
+  // const[active, setActive] = useState(false)
 
   useEffect(() => {
     if (props.edit) {
