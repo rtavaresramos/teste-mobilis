@@ -5,8 +5,8 @@ export default function Button(props) {
     props.buttonClicked();
   }
   return (
-    <div className="btn" onClick={click}>
-      <p className="button">{props.name}</p>
+    <div className={`btn ${props.cancel ? 'cancel-button':''}`} onClick={click}>
+      <p className={`button ${props.cancel ? 'cancel-button':''}`}>{props.name}</p>
     </div>
   );
 }

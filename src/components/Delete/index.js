@@ -34,7 +34,7 @@ export default function Delete(props) {
           Deseja continuar?
         </h1>
         <div className="button-place">
-          <Button name="Cancelar" buttonClicked={closeModal} />
+          <Button name="Cancelar" cancel buttonClicked={closeModal} />
 
           <Button name="Continuar" buttonClicked={deleteData} />
         </div>

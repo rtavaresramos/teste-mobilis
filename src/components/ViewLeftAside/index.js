@@ -60,7 +60,7 @@ export default function ViewLeftAside(props) {
   return (
     <div className="view-left-aside">
       <div className="logo-container">
-        <img src={Logo} alt="logo" />
+        <img src={Logo} alt="logo" onClick={changeViewToDashboard} style={{cursor: 'pointer'}} />
       </div>
       <div className="call-to-action" onClick={addNewRegister}>
         <p className="button">

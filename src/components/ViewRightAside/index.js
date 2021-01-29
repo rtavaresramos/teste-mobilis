@@ -12,6 +12,7 @@ import AllNotes from "../AllNotes";
 import "./styles.css";
 
 export default function ViewRightAside(props) {
+  const popUp = useRef();
   const uploadImageRef = useRef();
   const noteInputRef = useRef();
   const [active, setActive] = useState(false);
@@ -35,7 +36,19 @@ export default function ViewRightAside(props) {
         });
       }
     });
+
+  document.addEventListener("mousedown", handleClick);
+
+// eslint-disable-next-line
   }, [props.userInfo]);
+
+  const handleClick = e => {
+    if (active && popUp.current.contains(e.target)) {
+      return;
+    }
+    // outside click 
+    setActive(false)
+  };
 
   function handlePhoto() {
     uploadImageRef.current.value = null;
@@ -121,7 +134,7 @@ export default function ViewRightAside(props) {
         </div>
       </div>
       <div className="main">
-        {active ? <PopUp /> : <></>}
+        {active ? <PopUp ref={popUp} /> : <></>}
 
         <div className="time-line">
           <h3 className="notes">
