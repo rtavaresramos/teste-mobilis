@@ -1,0 +1,75 @@
+h1 {
+  font-size: 1.5rem;
+  color: white;
+}
+
+h5 {
+  font-size: 3.5rem !important;
+  color: white;
+}
+
+h3 {
+  font-size: 2rem;
+  color: white;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cards-place {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.main-calendar {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+  height: 260px;
+  width: 100%;
+  margin: 20px;
+  background: #239c49;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px -5px #778dad;
+}
+
+.main-sections {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.main-sections .section-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 45%;
+  height: 100%;
+  padding: 20px;
+
+  background: #fcc000;
+  border-radius: 10px;
+  box-shadow: 0 0 10px -5px #000;
+}
+.main-sections .section-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  height: 240px;
+  padding: 20px;
+
+  background: #3350b8;
+  border-radius: 10px;
+  box-shadow: 0 0 10px -5px #000;
+}

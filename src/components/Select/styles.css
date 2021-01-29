@@ -1,60 +1,40 @@
 /* Reset Select */
 select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-    border: 0 !important;
-    background: var(--background);
-    background-image: none;
-  }
-  /* Remove IE arrow */
-  select::-ms-expand {
-    display: none;
-  }
-  /* Custom Select */
-  .select {
-    position: relative;
-    display: flex;
-    flex: 1;
-    width: 20em;
-    height: 3em;
-    line-height: 3;
-    overflow: hidden;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-  
-  .select:hover {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  
-  select {
-    flex: 1;
-    padding: 0 0.5em;
-    color: var(--text-color);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 700;
-  }
-  /* Arrow */
-  .select::after {
-    content: "\25BC";
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    color: var(--text-color);
-    background: var(--background);
-    cursor: pointer;
-    pointer-events: none;
-    -webkit-transition: 0.25s all ease;
-    -o-transition: 0.25s all ease;
-    transition: 0.25s all ease;
-  }
-  /* Transition */
-  .select:hover::after {
-    color: var(--text-color);
-  }
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: var(--background);
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  flex: 1;
+  width: 20em;
+  line-height: 3;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+select {
+  flex: 1;
+  padding: 0 0.5em;
+  cursor: pointer;
+  font-size: 16px;
+}
+/* Arrow */
+
+/* Transition */
+.select:hover::after {
+  color: var(--text-color);
+}

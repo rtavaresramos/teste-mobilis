@@ -15,7 +15,9 @@ export default function SignUp() {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      return setError(
+        "A senha informada é diferente da confirmação, verifique e tente novamente."
+      );
     }
 
     try {
@@ -24,7 +26,9 @@ export default function SignUp() {
       await signup(emailRef.current.value, passwordRef.current.value);
       history.push("/home");
     } catch {
-      setError("Failed to create an account");
+      setError(
+        "Erro ao criar está conta, verifique os dados informados e tente novamente"
+      );
     }
 
     setLoading(false);
@@ -60,10 +64,7 @@ export default function SignUp() {
         <button type="submit" class="fadeIn">
           Cadastrar
         </button>
-       {error ?  <div class="error" >
-          {error}
-        </div> : ''}
-
+        {error ? <div class="error">{error}</div> : ""}
       </form>
     </>
   );

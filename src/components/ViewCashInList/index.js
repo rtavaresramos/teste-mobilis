@@ -1,24 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import TableRow from "../TableRow";
 import AddNewRegister from "../AddNewRegister";
 import Delete from "../Delete";
 
-import Trash from "../icons/Trash";
-import Edit from "../icons/Edit";
+import firebase from "../../firebase";
 
 import "./styles.css";
 
-export default function CashInList() {
-  const [listBySearch, setListBySearch] = useState([]);
-  const [edit, setEdit] = useState(false);
-  const [remove, setRemove] = useState(false);
+export default function ViewCashInList(props) {
+  const [cashIn, setCashIn] = useState();
+  const [edit, setEdit] = useState();
+  const [remove, setRemove] = useState();
 
-  function setEditItem(evt) {
+  useEffect(() => {
+    let items = [];
+
+    const ref = firebase.database().ref(`users/${props.userId}/cashIn`);
+    ref.on("value", (data) => {
+      const values = data.val();
+
+      if (values !== undefined && values !== null) {
+        items = Object.keys(values).map((i) => values[i]);
+        return setCashIn(
+          props.searchText
+            ? items.filter(
+                (data) =>
+                  data.description
+                    .toLowerCase()
+                    .includes(props.searchText.toLowerCase()) ||
+                  data.tag
+                    .toLowerCase()
+                    .includes(props.searchText.toLowerCase()) ||
+                  data.value
+                    .toLowerCase()
+                    .includes(props.searchText.toLowerCase())
+              )
+            : items
+        );
+      }
+    });
+  }, [props.searchText]);
+  function openEditModal(evt) {
     setEdit(evt);
+    setRemove(false);
   }
 
-  function setRemoveItem(evt) {
+  function openRemoveModal(evt) {
     setRemove(evt);
+    setEdit(false);
   }
 
   function closeEditionModal() {
@@ -29,54 +59,62 @@ export default function CashInList() {
     setRemove(false);
   }
 
+  function checkArray() {
+    if (cashIn.length - 1 === 0) {
+      setCashIn([]);
+    }
+  }
+
   return (
     <div className="view-list">
       <table className="table">
         <thead>
           <tr>
             <th title="Name">Descrição</th>
-            <th title="Email">Origem</th>
+            <th title="Email">Tag</th>
             <th title="Action">Valor</th>
             <th title="Action">Ação</th>
           </tr>
         </thead>
         <tbody>
-          {listBySearch.map((item) => {
-            return (
-              <tr key="item.id">
-                <td>{item.description}</td>
-                <td>{item.origin}</td>
-                <td>
-                  {parseFloat(item.value).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </td>
-                <td className="d-flex justify-between align-center">
-                  <a
-                    href="#"
-                    className="list-action-icon"
-                    onClick={setEditItem(item)}
-                  >
-                    <Edit />
-                  </a>
-
-                  <a
-                    href="#"
-                    className="list-action-icon"
-                    onClick={setRemoveItem(item)}
-                  >
-                    <Trash />
-                  </a>
-                </td>
-              </tr>
-            );
-          })}
+          {cashIn
+            ? cashIn.map((item) => {
+                return (
+                  <TableRow
+                    data={item}
+                    route="cashIn"
+                    changeRemove={openRemoveModal}
+                    changeEdit={openEditModal}
+                  />
+                );
+              })
+            : ""}
         </tbody>
       </table>
-      {listBySearch.length < 1 ? (
-        <div style={{display: "flex", justifyContent: "center"}}>
-          <h3 style={{textAlign: "center", margin:"10px 0", color: "var(--text-color)" }}>
+      {cashIn && cashIn.length < 1 ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h3
+            style={{
+              textAlign: "center",
+              margin: "10px 0",
+              color: "var(--text-color)",
+            }}
+          >
+            Não há dados
+          </h3>
+        </div>
+      ) : (
+        <></>
+      )}
+      {!cashIn ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h3
+            style={{
+              textAlign: "center",
+              margin: "10px 0",
+              color: "var(--text-color)",
+            }}
+          >
             Não há dados
           </h3>
         </div>
@@ -88,7 +126,6 @@ export default function CashInList() {
           <AddNewRegister
             close={closeEditionModal}
             route="cashIn"
-            className="overlay"
             edit={edit}
           />
         ) : (
@@ -102,6 +139,8 @@ export default function CashInList() {
             route="cashIn"
             className="overlay"
             remove={remove}
+            userId={props.userId}
+            checkArray={checkArray}
           />
         ) : (
           <></>

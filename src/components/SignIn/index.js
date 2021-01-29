@@ -21,7 +21,9 @@ export default function SignIn() {
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/home");
     } catch {
-      setError("Failed to log in");
+      setError(
+        "Credenciais inválidas, verifique os dados informados e tente novamente."
+      );
     }
 
     setLoading(false);
@@ -37,6 +39,7 @@ export default function SignIn() {
           placeholder="Email"
           ref={emailRef}
           required
+          style={{ textAlign: "center !important" }}
         />
         <input
           type="password"
@@ -46,13 +49,12 @@ export default function SignIn() {
           placeholder="Senha"
           ref={passwordRef}
           required
+          style={{ textAlign: "center !important" }}
         />
         <button type="submit" className="fadeIn">
           Entrar
         </button>
-        {error ?  <div class="error" >
-          {error}
-        </div> : ''}
+        {error ? <div class="error">{error}</div> : ""}
       </form>
     </>
   );

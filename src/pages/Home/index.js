@@ -39,29 +39,40 @@ export default function Home() {
     setShowRegisterModal(false);
   }
 
-  function changeMainView(viewFromAside){
-    setView(viewFromAside)
+  function changeMainView(viewFromAside) {
+    setView(viewFromAside);
   }
   return (
     <div>
       {loading ? <Loading /> : <></>}
-      <div>
-        {showRegisterModal ? <AddNewRegister close={closeRegisterModal} /> : <></>}
-        <div className="container">
-          <aside className="left-aside">
-            <ViewLeftAside openModal={openNewRegisterModal} changeView={changeMainView} />
-          </aside>
-          <main className="main">
-            <ViewMain view={view} />
-          </main>
-          <aside className="right-aside">
-            <ViewRightAside
-              userInfo={currentUser}
-              loading={changeLoadingState}
-            />
-          </aside>
+      {currentUser ? (
+        <div>
+          {showRegisterModal ? (
+            <AddNewRegister close={closeRegisterModal} userInfo={currentUser} />
+          ) : (
+            <></>
+          )}
+          <div className="container">
+            <aside className="left-aside">
+              <ViewLeftAside
+                openModal={openNewRegisterModal}
+                changeView={changeMainView}
+              />
+            </aside>
+            <main className="main">
+              <ViewMain view={view} userInfo={currentUser} />
+            </main>
+            <aside className="right-aside">
+              <ViewRightAside
+                userInfo={currentUser}
+                loading={changeLoadingState}
+              />
+            </aside>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
