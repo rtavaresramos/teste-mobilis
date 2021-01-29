@@ -107,6 +107,22 @@ export default function ViewCashOutList(props) {
       ) : (
         <></>
       )}
+
+      {!cashOut ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h3
+            style={{
+              textAlign: "center",
+              margin: "10px 0",
+              color: "var(--text-color)",
+            }}
+          >
+            Não há dados
+          </h3>
+        </div>
+      ) : (
+        <></>
+      )}
       <div>
         {edit ? (
           <AddNewRegister
