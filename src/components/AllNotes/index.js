@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import firebase from "../../firebase";
 
 import Note from "../Note";
 
-import './styles.css'
+import "./styles.css";
 
 export default function AllNotes(props) {
   const [allNotes, setAllNotes] = useState();
@@ -21,20 +21,26 @@ export default function AllNotes(props) {
         return setAllNotes(notes);
       }
     });
+    // eslint-disable-next-line
   }, []);
 
-function checkArray(){
-  if(allNotes.length-1 === 0){
-    setAllNotes([])
+  function checkArray() {
+    if (allNotes.length - 1 === 0) {
+      setAllNotes([]);
+    }
   }
-}
 
   return (
     <div>
       {allNotes
         ? allNotes.map((data) => (
             <div className="links-item">
-                <Note key={data.id} data={data} userId={props.userInfo.uid} checkArray={checkArray} />
+              <Note
+                key={data.id}
+                data={data}
+                userId={props.userInfo.uid}
+                checkArray={checkArray}
+              />
             </div>
           ))
         : ""}

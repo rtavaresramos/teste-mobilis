@@ -24,8 +24,9 @@ a {
   background: #f5f5fb !important;
 }
 .main {
-  background: #f5f5fb !important;
+  height: 100vh;
   flex: 1;
   padding: 20px;
   overflow: hidden;
+  background: #f5f5fb !important;
 }

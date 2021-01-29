@@ -1,53 +1,23 @@
-import React, {useState} from "react";
+import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
-
-import './styles.css'
+import "./styles.css";
 
 export default function PopUp() {
-  const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
 
-
   async function handleLogout() {
-    setError("");
-
     try {
       history.push("/login");
       await logout();
-    } catch {
-      setError("Failed to log out");
-    }
+    } catch {}
   }
   return (
     <div className="popup">
       <div className="popup-item">
-        <span className="icon">
-          <svg
-            width="14"
-            height="19"
-            viewBox="0 0 14 19"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M11 4.85292C11 7.01257 9.206 8.76888 7 8.76888C4.794 8.76888 3 7.01257 3 4.85292C3 2.69326 4.794 0.936951 7 0.936951C9.206 0.936951 11 2.69326 11 4.85292ZM14 17.5798C14 18.1202 13.553 18.5588 13 18.5588H1C0.447 18.5588 0 18.1202 0 17.5798C0 13.8009 3.141 10.7269 7 10.7269C10.859 10.7269 14 13.8009 14 17.5798Z"
-              fill="#282B31"
-            />
-          </svg>
-        </span>
-        <p className="link">Perfil</p>
-      </div>
-
-      <div className="horizontal-divisor"></div>
-
-      <div className="popup-item">
-        <span className="icon">
+        <span>
           <svg
             width="17"
             height="17"
@@ -64,7 +34,9 @@ export default function PopUp() {
             />
           </svg>
         </span>
-        <p className="logout link" onClick={handleLogout} >Log out</p>
+        <p className="logout link" onClick={handleLogout}>
+          Log out
+        </p>
       </div>
     </div>
   );

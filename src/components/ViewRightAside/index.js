@@ -9,7 +9,6 @@ import ProfileImage from "../ProfileImage";
 import PopUp from "../PopUp";
 import AllNotes from "../AllNotes";
 
-
 import "./styles.css";
 
 export default function ViewRightAside(props) {
@@ -17,7 +16,6 @@ export default function ViewRightAside(props) {
   const noteInputRef = useRef();
   const [active, setActive] = useState(false);
   const [profile, setProfile] = useState({});
-
 
   useEffect(() => {
     const ref = firebase.database().ref(`users`);
@@ -38,7 +36,6 @@ export default function ViewRightAside(props) {
       }
     });
   }, [props.userInfo]);
-
 
   function handlePhoto() {
     uploadImageRef.current.value = null;
@@ -68,12 +65,12 @@ export default function ViewRightAside(props) {
     setActive(!active);
   }
 
-  function checkValue(evt){
-    if(evt.keyCode === 13){
+  function checkValue(evt) {
+    if (evt.keyCode === 13) {
       const ref = firebase.database().ref(`users/${props.userInfo.uid}/notes`);
       const noteId = ref.push().key;
 
-      if(noteInputRef.current.value !== ""){
+      if (noteInputRef.current.value !== "") {
         ref.child(noteId).set(
           {
             id: noteId,
@@ -85,16 +82,13 @@ export default function ViewRightAside(props) {
             if (err) {
               console.error(err);
             }
-  
+
             noteInputRef.current.value = "";
           }
-          );
+        );
       }
     }
   }
-
-
-
 
   return (
     <div className="view-right-aside">
@@ -137,11 +131,16 @@ export default function ViewRightAside(props) {
             Lembretes
           </h3>
           <div className="input-place">
-            <input id="notes" ref={noteInputRef} type="text" placeholder="Adicionar lembrete" onKeyUp={checkValue} />
+            <input
+              id="notes"
+              ref={noteInputRef}
+              type="text"
+              placeholder="Adicionar lembrete"
+              onKeyUp={checkValue}
+            />
           </div>
-          
-            <AllNotes userInfo={props.userInfo} />
 
+          <AllNotes userInfo={props.userInfo} />
         </div>
       </div>
     </div>

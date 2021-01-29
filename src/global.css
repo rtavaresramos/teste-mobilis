@@ -80,9 +80,9 @@ html {
 }
 
 body {
-  height: 100vh;
+  max-height: 100vh;
   display: flex;
-  overflow-x: hidden;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
   background: var(--background);
@@ -138,6 +138,7 @@ body {
 .error {
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: center;
   max-width: 300px;
   min-height: 50px;
@@ -240,11 +241,10 @@ table {
   /* max-width: 800px; */
   width: 100%;
   margin: 0 auto;
-  position: relative;
 }
-table * {
+/* table * {
   position: relative;
-}
+} */
 /* table td {
 	 min-width: 50px;
 } */

@@ -1,33 +1,44 @@
-import React from 'react'
+import React from "react";
+import firebase from "../../firebase";
 
-import Button from '../Button'
+import Button from "../Button";
 
-import './styles.css'
+import "./styles.css";
 
 export default function Delete(props) {
-    function closeModal(){
-        props.close()
-    }
+  function closeModal() {
+    props.close();
+  }
 
-    function deleteData(){
-        console.log('deletar item')
-    }
+  function deleteData() {
+    props.checkArray();
+    const ref = firebase.database().ref(`users/${props.userId}/${props.route}`);
+    ref.child(props.remove.id).remove();
 
-    return (
-        <div className="links">
-        <div
-          style="background: var(--background); border-radius: 8px; padding: 8px"
-        >
-          <h1>
-            Você está excluindo essa informação de forma definitiva.<br />
-            Deseja continuar?
-          </h1>
-          <div className="button-place">
-            <Button name="Cancelar" onClick={closeModal} />
-    
-            <Button name="Continuar" onClick={deleteData} />
-          </div>
+    props.close();
+  }
+
+  return (
+    <div className="links">
+      <div
+        style={{
+          background: "var(--background)",
+          borderRadius: "8px",
+          padding: "8px",
+        }}
+        className="delete-box"
+      >
+        <h1>
+          Você está excluindo essa informação de forma definitiva.
+          <br />
+          Deseja continuar?
+        </h1>
+        <div className="button-place">
+          <Button name="Cancelar" buttonClicked={closeModal} />
+
+          <Button name="Continuar" buttonClicked={deleteData} />
         </div>
       </div>
-    )
+    </div>
+  );
 }
