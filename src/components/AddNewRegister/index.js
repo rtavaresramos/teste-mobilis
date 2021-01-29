@@ -7,14 +7,14 @@ import firebase from "../../firebase";
 
 import "./styles.css";
 export default function AddNewRegister(props) {
-  const inputDescription = useRef();
-  const inputTag = useRef();
-  const inputData = useRef();
+  const inputDescription = useRef("");
+  const inputTag = useRef("");
+  const inputData = useRef("");
 
   const [error, setError] = useState();
   const [selectedOption, setSelectedOption] = useState(1);
   const [value, setValue] = useState("R$0,00");
-  // const [date, setDate] = useState(new Date());
+  const [triedToRegister, setTriedToRegister] = useState(false);
 
   useEffect(() => {
     if (props.edit) {
@@ -23,7 +23,8 @@ export default function AddNewRegister(props) {
       inputTag.current.value = props.edit.tag;
       inputData.current.value = props.edit.date;
       setValue(props.edit.value);
-    }
+    } 
+
     // eslint-disable-next-line
   }, []);
 
@@ -67,6 +68,7 @@ export default function AddNewRegister(props) {
 
       closeModal();
     } else {
+      setTriedToRegister(true)
       setError(
         "Há itens obrigatórios não preenchidos, verifique e tente novamente"
       );
@@ -106,6 +108,8 @@ export default function AddNewRegister(props) {
 
       closeModal();
     } else {
+
+      setTriedToRegister(true)
       setError(
         "Há itens obrigatórios não preenchidos, verifique e tente novamente"
       );
@@ -121,7 +125,7 @@ export default function AddNewRegister(props) {
       <div class="form">
         <div class="all-data">
           <div class="input-container">
-            <div class="input-info">
+            <div class={`input-info ${triedToRegister && inputDescription.current.value === "" ? "invalid" : ''}`}>
               <label>*Descrição</label>
               <input ref={inputDescription} required type="text" />
             </div>
@@ -141,17 +145,17 @@ export default function AddNewRegister(props) {
               </div>
             )}
 
-            <div class="input-info">
+            <div class={`input-info ${triedToRegister && inputTag.current.value === "" ? "invalid" : ''}`}>
               <label>*Tag</label>
               <input ref={inputTag} required type="text" />
             </div>
 
-            <div class="input-date">
+            <div class={`input-date ${triedToRegister && inputData.current.value === "" ? "invalid" : ''}`}>
               <label>*Data</label>
               <input ref={inputData} required type="date" />
             </div>
 
-            <div class="input-info">
+            <div class={`input-info ${triedToRegister && value === "R$0,00" ? "invalid" : ''}`}>
               <label>*Valor</label>
               <CurrencyInput
                 onChangeEvent={setValueChange}

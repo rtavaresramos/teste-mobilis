@@ -85,7 +85,7 @@ export default function Dashboard(props) {
                     )
                     .reduce((acumulator, currentValue) => {
                       return parseFloat(acumulator) + parseFloat(currentValue);
-                    }) )-
+                    }) ) -
                     parseFloat(cashOut
                       .map((data) =>
                         data.value.replace("R$", "").replace(".", "")
