@@ -41,6 +41,7 @@ export default function ViewCashOutList(props) {
         );
       }
     });
+    // eslint-disable-next-line
   }, [props.searchText]);
 
   function openEditModal(evt) {

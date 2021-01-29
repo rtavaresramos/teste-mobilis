@@ -9,7 +9,7 @@ export default function SignIn() {
   const passwordRef = useRef();
   const { login } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const history = useHistory();
 
   async function signInFunction(e) {
@@ -17,7 +17,7 @@ export default function SignIn() {
 
     try {
       setError("");
-      setLoading(true);
+
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/home");
     } catch {
@@ -25,8 +25,6 @@ export default function SignIn() {
         "Credenciais inválidas, verifique os dados informados e tente novamente."
       );
     }
-
-    setLoading(false);
   }
   return (
     <>

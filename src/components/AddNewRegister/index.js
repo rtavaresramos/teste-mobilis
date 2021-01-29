@@ -24,6 +24,7 @@ export default function AddNewRegister(props) {
       inputData.current.value = props.edit.date;
       setValue(props.edit.value);
     }
+    // eslint-disable-next-line
   }, []);
 
   function closeModal() {

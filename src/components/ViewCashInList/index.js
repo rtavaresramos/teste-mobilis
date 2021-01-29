@@ -40,6 +40,7 @@ export default function ViewCashInList(props) {
         );
       }
     });
+    // eslint-disable-next-line
   }, [props.searchText]);
   function openEditModal(evt) {
     setEdit(evt);

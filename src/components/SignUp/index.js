@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function SignUp() {
   const emailRef = useRef();
@@ -8,7 +8,7 @@ export default function SignUp() {
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const history = useHistory();
 
   async function signUpFunction(e) {
@@ -22,7 +22,7 @@ export default function SignUp() {
 
     try {
       setError("");
-      setLoading(true);
+
       await signup(emailRef.current.value, passwordRef.current.value);
       history.push("/home");
     } catch {
@@ -30,8 +30,6 @@ export default function SignUp() {
         "Erro ao criar está conta, verifique os dados informados e tente novamente"
       );
     }
-
-    setLoading(false);
   }
   return (
     <>

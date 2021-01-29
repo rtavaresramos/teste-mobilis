@@ -21,6 +21,7 @@ export default function AllNotes(props) {
         return setAllNotes(notes);
       }
     });
+    // eslint-disable-next-line
   }, []);
 
   function checkArray() {
