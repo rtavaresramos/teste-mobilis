@@ -26,7 +26,7 @@ export default function SearchBar(props) {
       <input
         type="text"
         name="search"
-        placeholder="Buscar"
+        placeholder="Encontre na lista de Receitas ou Despesa um registro em específico"
         id="search"
         onChange={emitSearchText}
       />

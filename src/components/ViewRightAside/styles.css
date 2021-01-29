@@ -12,6 +12,7 @@ h4 {
 
 h3.notes {
   font-size: 14px !important;
+  color: var(--primary)!important;
 }
 
 .title p {

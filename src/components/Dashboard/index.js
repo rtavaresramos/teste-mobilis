@@ -37,7 +37,7 @@ export default function Dashboard(props) {
         <div className="section-2">
           <h1>Total de Receitas:</h1>
           <h3>
-            {cashIn &&
+            {cashIn ?
               parseFloat(
                 cashIn
                   .map((data) => data.value.replace("R$", "").replace(".", ""))
@@ -47,13 +47,13 @@ export default function Dashboard(props) {
               ).toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
-              })}
+              }):"R$ 0,00"}
           </h3>
         </div>
         <div className="section-1">
           <h1>Total de Gastos:</h1>
           <h3>
-            {cashOut &&
+            {cashOut ?
               parseFloat(
                 cashOut
                   .map((data) => data.value.replace("R$", "").replace(".", ""))
@@ -63,7 +63,7 @@ export default function Dashboard(props) {
               ).toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
-              })}
+              }) : "R$ 0,00"}
           </h3>
         </div>
       </div>
@@ -72,7 +72,7 @@ export default function Dashboard(props) {
         <div className="cards-place">
           <h5>
             {cashOut &&
-              cashIn &&
+              cashIn ?
               parseFloat(
                 cashIn
                   .map((data) => data.value.replace("R$", "").replace(".", ""))
@@ -89,7 +89,7 @@ export default function Dashboard(props) {
               ).toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
-              })}
+              }) : "R$ 0,00"}
           </h5>
         </div>
       </div>
