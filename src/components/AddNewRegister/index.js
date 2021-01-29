@@ -33,7 +33,7 @@ export default function AddNewRegister(props) {
   }, []);
 
   function closeModal() {
-    setActive(false)
+    // setActive(false)
     props.close();
   }
 
