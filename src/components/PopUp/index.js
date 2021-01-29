@@ -1,23 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 import "./styles.css";
 
 export default function PopUp() {
-  const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
 
   async function handleLogout() {
-    setError("");
-
     try {
       history.push("/login");
       await logout();
-    } catch {
-      setError("Failed to log out");
-    }
+    } catch {}
   }
   return (
     <div className="popup">

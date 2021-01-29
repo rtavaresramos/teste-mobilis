@@ -29,6 +29,7 @@ export default function Dashboard(props) {
         return setCashOut(items);
       }
     });
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="main">

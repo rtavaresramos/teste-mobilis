@@ -25,6 +25,7 @@ export default function Home() {
         setLoading(false);
       }, 1000);
     }
+    // eslint-disable-next-line
   }, [currentUser]);
 
   function changeLoadingState(state) {
