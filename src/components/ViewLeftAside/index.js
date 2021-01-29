@@ -31,6 +31,7 @@ export default function ViewLeftAside(props) {
           break;
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   function changeViewToDashboard() {
