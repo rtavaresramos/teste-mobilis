@@ -93,7 +93,7 @@ export default function AddNewRegister(props) {
       .database()
       .ref(
         `users/${props.edit.assigneeId}/${
-          props.edit.type === "1" ? "cashIn" : "cashOut"
+          props.route
         }`
       );
 
@@ -107,7 +107,6 @@ export default function AddNewRegister(props) {
       ref.child(props.edit.id).update(
         {
           description: inputDescription.current.value,
-          type: selectedOption,
           tag: inputTag.current.value,
           date: inputData.current.value,
           value,
