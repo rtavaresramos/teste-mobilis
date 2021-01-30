@@ -25,12 +25,25 @@ export default function AddNewRegister(props) {
       inputTag.current.value = props.edit.tag;
       inputData.current.value = props.edit.date;
       setValue(props.edit.value);
-    } 
+    }
     // setActive(true)
     // document.addEventListener("mousedown", handleClick);
-    
+
+    // eslint-disable-next-line
+
+    document.addEventListener("mousedown", handleAddNewClick);
+
     // eslint-disable-next-line
   }, []);
+
+  const handleAddNewClick = (e) => {
+    if (form.current.contains(e.target)) {
+      return;
+    } else {
+      document.removeEventListener("mousedown", handleAddNewClick);
+      closeModal();
+    }
+  };
 
   function closeModal() {
     // setActive(false)
@@ -41,7 +54,7 @@ export default function AddNewRegister(props) {
   //   if (active && form.current.contains(e.target)) {
   //     return;
   //   }
-  //   // outside click 
+  //   // outside click
   //   closeModal()
   // };
 
@@ -81,7 +94,7 @@ export default function AddNewRegister(props) {
 
       closeModal();
     } else {
-      setTriedToRegister(true)
+      setTriedToRegister(true);
       setError(
         "Há itens obrigatórios não preenchidos, verifique e tente novamente"
       );
@@ -91,11 +104,7 @@ export default function AddNewRegister(props) {
   function updateMember() {
     const ref = firebase
       .database()
-      .ref(
-        `users/${props.edit.assigneeId}/${
-          props.route
-        }`
-      );
+      .ref(`users/${props.edit.assigneeId}/${props.route}`);
 
     if (
       inputDescription.current.value !== "" &&
@@ -120,8 +129,7 @@ export default function AddNewRegister(props) {
 
       closeModal();
     } else {
-
-      setTriedToRegister(true)
+      setTriedToRegister(true);
       setError(
         "Há itens obrigatórios não preenchidos, verifique e tente novamente"
       );
@@ -137,7 +145,13 @@ export default function AddNewRegister(props) {
       <div className="form" ref={form}>
         <div className="all-data">
           <div className="input-container">
-            <div className={`input-info ${triedToRegister && inputDescription.current.value === "" ? "invalid" : ''}`}>
+            <div
+              className={`input-info ${
+                triedToRegister && inputDescription.current.value === ""
+                  ? "invalid"
+                  : ""
+              }`}
+            >
               <label>*Descrição</label>
               <input ref={inputDescription} required type="text" />
             </div>
@@ -157,17 +171,33 @@ export default function AddNewRegister(props) {
               </div>
             )}
 
-            <div className={`input-info ${triedToRegister && inputTag.current.value === "" ? "invalid" : ''}`}>
+            <div
+              className={`input-info ${
+                triedToRegister && inputTag.current.value === ""
+                  ? "invalid"
+                  : ""
+              }`}
+            >
               <label>*Tag</label>
               <input ref={inputTag} required type="text" />
             </div>
 
-            <div className={`input-date ${triedToRegister && inputData.current.value === "" ? "invalid" : ''}`}>
+            <div
+              className={`input-date ${
+                triedToRegister && inputData.current.value === ""
+                  ? "invalid"
+                  : ""
+              }`}
+            >
               <label>*Data</label>
               <input ref={inputData} required type="date" />
             </div>
 
-            <div className={`input-info ${triedToRegister && value === "R$0,00" ? "invalid" : ''}`}>
+            <div
+              className={`input-info ${
+                triedToRegister && value === "R$0,00" ? "invalid" : ""
+              }`}
+            >
               <label>*Valor</label>
               <CurrencyInput
                 onChangeEvent={setValueChange}
