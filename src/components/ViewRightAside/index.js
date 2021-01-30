@@ -37,18 +37,8 @@ export default function ViewRightAside(props) {
       }
     });
 
-  // document.addEventListener("mousedown", handleClick);
-
-// eslint-disable-next-line
+    // eslint-disable-next-line
   }, [props.userInfo]);
-
-  // const handleClick = e => {
-  //   if (active && popUp.current.contains(e.target)) {
-  //     return;
-  //   }
-  //   // outside click 
-  //   setActive(false)
-  // };
 
   function handlePhoto() {
     uploadImageRef.current.value = null;
@@ -76,6 +66,9 @@ export default function ViewRightAside(props) {
 
   function changeActiveState() {
     setActive(!active);
+  }
+  function closePopUp() {
+    setActive(false);
   }
 
   function checkValue(evt) {
@@ -133,8 +126,8 @@ export default function ViewRightAside(props) {
           </span>
         </div>
       </div>
-      <div className="main">
-        {active ? <PopUp ref={popUp} /> : <></>}
+      <div className="main" ref={popUp}>
+        {active ? <PopUp closePopUp={closePopUp} active={active} /> : <></>}
 
         <div className="time-line">
           <h3 className="notes">

@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 import "./styles.css";
 
-export default function PopUp() {
+export default function PopUp(props) {
   const { logout } = useAuth();
   const history = useHistory();
+  const popUpRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+
+    // eslint-disable-next-line
+  }, []);
+
+  const handleClick = (e) => {
+    if (popUpRef.current.contains(e.target)) {
+      return;
+    } else {
+      document.removeEventListener("mousedown", handleClick);
+      props.closePopUp();
+    }
+  };
 
   async function handleLogout() {
     try {
@@ -15,7 +31,7 @@ export default function PopUp() {
     } catch {}
   }
   return (
-    <div className="popup">
+    <div className="popup" ref={popUpRef}>
       <div className="popup-item">
         <span>
           <svg
