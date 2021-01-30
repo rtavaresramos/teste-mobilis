@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import firebase from "../../firebase";
 
 import Button from "../Button";
@@ -6,6 +6,22 @@ import Button from "../Button";
 import "./styles.css";
 
 export default function Delete(props) {
+  const deleteRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+
+    // eslint-disable-next-line
+  }, []);
+
+  const handleClick = (e) => {
+    if (deleteRef.current.contains(e.target)) {
+      return;
+    } else {
+      document.removeEventListener("mousedown", handleClick);
+      props.closePopUp();
+    }
+  };
   function closeModal() {
     props.close();
   }
@@ -19,7 +35,7 @@ export default function Delete(props) {
   }
 
   return (
-    <div className="links">
+    <div className="links" ref={deleteRef}>
       <div
         style={{
           background: "var(--background)",
