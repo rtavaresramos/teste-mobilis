@@ -28,11 +28,11 @@ export default function Delete(props) {
         }}
         className="delete-box"
       >
-        <h1>
+        <h6>
           Você está excluindo essa informação de forma definitiva.
           <br />
           Deseja continuar?
-        </h1>
+        </h6>
         <div className="button-place">
           <Button name="Cancelar" cancel buttonClicked={closeModal} />
 
