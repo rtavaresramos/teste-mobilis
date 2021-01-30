@@ -7,7 +7,6 @@ import firebase from "../../firebase";
 
 import "./styles.css";
 export default function AddNewRegister(props) {
-  const form = useRef();
   const inputDescription = useRef("");
   const inputTag = useRef("");
   const inputData = useRef("");
@@ -16,7 +15,6 @@ export default function AddNewRegister(props) {
   const [selectedOption, setSelectedOption] = useState(1);
   const [value, setValue] = useState("R$0,00");
   const [triedToRegister, setTriedToRegister] = useState(false);
-  // const[active, setActive] = useState(false)
 
   useEffect(() => {
     if (props.edit) {
@@ -26,37 +24,13 @@ export default function AddNewRegister(props) {
       inputData.current.value = props.edit.date;
       setValue(props.edit.value);
     }
-    // setActive(true)
-    // document.addEventListener("mousedown", handleClick);
-
-    // eslint-disable-next-line
-
-    document.addEventListener("mousedown", handleAddNewClick);
 
     // eslint-disable-next-line
   }, []);
 
-  const handleAddNewClick = (e) => {
-    if (form.current.contains(e.target)) {
-      return;
-    } else {
-      document.removeEventListener("mousedown", handleAddNewClick);
-      closeModal();
-    }
-  };
-
   function closeModal() {
-    // setActive(false)
     props.close();
   }
-
-  // const handleClick = e => {
-  //   if (active && form.current.contains(e.target)) {
-  //     return;
-  //   }
-  //   // outside click
-  //   closeModal()
-  // };
 
   function addData() {
     const ref = firebase
@@ -102,8 +76,6 @@ export default function AddNewRegister(props) {
   }
 
   function updateMember() {
-    document.removeEventListener("mousedown", handleAddNewClick);
-
     const ref = firebase
       .database()
       .ref(`users/${props.edit.assigneeId}/${props.route}`);
@@ -144,7 +116,7 @@ export default function AddNewRegister(props) {
 
   return (
     <div className={props.edit ? "no-overlay" : "overlay"}>
-      <div className="form" ref={form}>
+      <div className="form">
         <div className="all-data">
           <div className="input-container">
             <div

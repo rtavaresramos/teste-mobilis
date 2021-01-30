@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import firebase from "../../firebase";
 
 import Button from "../Button";
@@ -6,22 +6,6 @@ import Button from "../Button";
 import "./styles.css";
 
 export default function Delete(props) {
-  const deleteRef = useRef();
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClick);
-
-    // eslint-disable-next-line
-  }, []);
-
-  const handleClick = (e) => {
-    if (deleteRef.current.contains(e.target)) {
-      return;
-    } else {
-      document.removeEventListener("mousedown", handleClick);
-      props.closeModal();
-    }
-  };
   function closeModal() {
     props.close();
   }
@@ -43,7 +27,6 @@ export default function Delete(props) {
           padding: "8px",
         }}
         className="delete-box"
-        ref={deleteRef}
       >
         <h6>
           Você está excluindo essa informação de forma definitiva.
