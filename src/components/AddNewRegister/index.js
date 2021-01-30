@@ -102,6 +102,8 @@ export default function AddNewRegister(props) {
   }
 
   function updateMember() {
+    document.removeEventListener("mousedown", handleAddNewClick);
+
     const ref = firebase
       .database()
       .ref(`users/${props.edit.assigneeId}/${props.route}`);
