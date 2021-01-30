@@ -19,7 +19,7 @@ export default function Delete(props) {
       return;
     } else {
       document.removeEventListener("mousedown", handleClick);
-      props.closePopUp();
+      props.closeModal();
     }
   };
   function closeModal() {
