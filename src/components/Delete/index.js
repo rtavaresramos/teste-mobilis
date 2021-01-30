@@ -35,7 +35,7 @@ export default function Delete(props) {
   }
 
   return (
-    <div className="links" ref={deleteRef}>
+    <div className="links">
       <div
         style={{
           background: "var(--background)",
@@ -43,6 +43,7 @@ export default function Delete(props) {
           padding: "8px",
         }}
         className="delete-box"
+        ref={deleteRef}
       >
         <h6>
           Você está excluindo essa informação de forma definitiva.
